@@ -66,6 +66,11 @@ struct OnboardingView: View {
             .padding()
           
           Text("Get Started")
+            .font(.system(.title3, design: .rounded))
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .offset(x: 20)
+          
           HStack{
             Capsule()
               .fill(Color("ColorRed"))
@@ -86,6 +91,10 @@ struct OnboardingView: View {
             }
             .foregroundColor(.white)
             .frame(width: 80, height: 80, alignment: .center)
+            .onTapGesture {
+              isOnboardingViewActive = false
+            }
+            
             Spacer()
           }
           
