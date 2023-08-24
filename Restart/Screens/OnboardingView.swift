@@ -19,6 +19,7 @@ struct OnboardingView: View {
   @State private var imageOffset: CGSize = CGSize(width: 0, height: 0)
   @State private var indicatorOpacity: Double = 1.0
   @State private var textTitle: String = "Share."
+  @State private var contents: String = ""
   
   // MARK: - BODY
   var body: some View {
@@ -36,6 +37,7 @@ struct OnboardingView: View {
             .fontWeight(.heavy)
             .foregroundColor(.white)
             .transition(.opacity)
+            .id(textTitle)
           
           Text("It's not how much we give but how much love we put into giving.")
             .font(.title3)
