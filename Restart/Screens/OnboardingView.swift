@@ -106,23 +106,24 @@ struct OnboardingView: View {
                 }
                 .onEnded {
                   _ in
-                  if buttonOffset > buttonWidth / 2 {
-                    buttonOffset = buttonWidth - 80
-                    isOnboardingViewActive = false
-                  } else {
-                    buttonOffset = 0
+                  withAnimation(Animation.easeOut(duration: 0.4)) {
+                    if buttonOffset > buttonWidth / 2 {
+                      buttonOffset = buttonWidth - 80
+                      isOnboardingViewActive = false
+                    } else {
+                      buttonOffset = 0
+                    }
                   }
                 }
             ) //: gesture
-            
             Spacer()
           }
-          
-          
-        }
+        }     //: footer
         .frame(width: buttonWidth, height: 80, alignment: .center)
         .padding()
-        //: footer
+        .opacity(isAnimating ? 1 : 0)
+        .offset(y: isAnimating ? 0 : 40)
+        .animation(.easeOut(duration: 1), value: isAnimating)
       } //: vstack
     } //: zstack
     .onAppear {
