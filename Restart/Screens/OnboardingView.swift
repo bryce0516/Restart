@@ -12,11 +12,12 @@ struct OnboardingView: View {
   
   @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
   
+  // MARK: - STATE
   @State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
   @State private var buttonOffset: CGFloat = 0
+  @State private var isAnimating: Bool = false
   
   // MARK: - BODY
-  
   var body: some View {
     ZStack {
       Color("ColorBlue")
@@ -38,7 +39,10 @@ struct OnboardingView: View {
             .foregroundColor(.white)
             .multilineTextAlignment(.center)
             .padding(.horizontal, 10)
-        } // header
+        } //: header
+        .opacity(isAnimating ? 1: 0)
+        .offset(y: isAnimating ? 0 : -40)
+        .animation(.easeOut(duration: 1), value: isAnimating)
         
         
         // MARK: - body
@@ -47,6 +51,8 @@ struct OnboardingView: View {
           Image("character-1")
             .resizable()
             .scaledToFit()
+            .opacity(isAnimating ? 1 : 0)
+            .animation(.easeOut(duration: 0.5), value: isAnimating)
         } //: body
         
         
@@ -87,9 +93,9 @@ struct OnboardingView: View {
             .foregroundColor(.white)
             .frame(width: 80, height: 80, alignment: .center)
             .offset(x: buttonOffset)
-//            .onTapGesture {
-//              isOnboardingViewActive = false
-//            }
+            //            .onTapGesture {
+            //              isOnboardingViewActive = false
+            //            }
             .gesture(
               DragGesture()
                 .onChanged {
@@ -119,6 +125,9 @@ struct OnboardingView: View {
         //: footer
       } //: vstack
     } //: zstack
+    .onAppear {
+      isAnimating = true
+    }
   }
 }
 
