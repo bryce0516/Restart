@@ -50,7 +50,9 @@ struct HomeView: View {
       
       
       Button {
-        isOnboardingViewActive = true
+        withAnimation {
+          isOnboardingViewActive = true
+        }
       } label: {
         
         Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
@@ -66,7 +68,7 @@ struct HomeView: View {
       
     } //: vstack
     .onAppear {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
         isAnimating = true
       })
     }
